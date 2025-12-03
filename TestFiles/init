@@ -1,0 +1,50 @@
+EXEC test_c
+EXEC test_b
+EXEC test_a
+LOAD 1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+ADD  1
+WRITE
+READ
+LOAD 9999
+WRITE
+EXIT

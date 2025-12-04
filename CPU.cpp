@@ -155,7 +155,7 @@ void CPU::unblockFinishedProcesses() {
 }
 
 void CPU::printSummary()const {
-    std::cout << "\n\nZusammenfassung der Simulation:\n\n";
+    std::cout << "\n\nSimulation Summary:\n\n";
     std::cout << "PID Process    Start     End     Turnaround    Accumulator" << std::endl;
     std::cout << "--- -------    -----     ---     ----------    -----------" << std::endl;
 

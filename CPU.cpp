@@ -1,12 +1,9 @@
 #include "CPU.h"
-#include <algorithm>
-#include <iostream>
 
 CPU::CPU(size_t p_pc, int p_acc){
     pc = p_pc;
     acc = p_acc;
     activeProcess = nullptr;
-    processQueueIndex = 0;
     currentTick = 0;
 }
 
@@ -44,7 +41,7 @@ std::shared_ptr<Process> CPU::readFile(const std::string& p_filePath){
     return process;
 }
 
-std::string CPU::getBlockedList(){
+std::string CPU::getBlockedList()const{
   std::string blockedList;
   for (const auto& process : processQueue) {
       if (process->checkIfBlocked()) {
@@ -55,7 +52,7 @@ std::string CPU::getBlockedList(){
   return blockedList;
 }
 
-void CPU::printStatus() {
+void CPU::printStatus()const{
     std::string blockedList = getBlockedList();
     if (blockedList.empty()) blockedList = "-";
     printf("%-7d %-3d %-12s %-7ld %-7d %-12s", currentTick, activeProcess->getPID(), activeProcess->getCleanName().c_str(), activeProcess->getCPUState().first,
@@ -71,7 +68,7 @@ void CPU::printStatus() {
     }
 }
 
-void CPU::printAllBlockedStatus() {
+void CPU::printAllBlockedStatus() const{
     std::string blockedList = getBlockedList();
     if (blockedList.empty()) blockedList = "-";
     printf("%-7d %-3s %-12s %-7ld %-7d %-12s", currentTick, "-", "----", activeProcess->getCPUState().first-1, activeProcess->getCPUState().second,
@@ -157,7 +154,7 @@ void CPU::unblockFinishedProcesses() {
     }
 }
 
-void CPU::printSummary() {
+void CPU::printSummary()const {
     std::cout << "\n\nZusammenfassung der Simulation:\n\n";
     std::cout << "PID Prozess    Start     Ende     Verweilzeit    Akkumulator" << std::endl;
     std::cout << "--- -------    -----     ----     -----------    -----------" << std::endl;

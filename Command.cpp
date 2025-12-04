@@ -1,6 +1,6 @@
 #include "Command.h"
 
-std::string Command::commandTypeToString() {
+std::string Command::commandTypeToString() const{
     switch (commandType) {
         case LOAD: return "LOAD";
         case ADD: return "ADD";
@@ -13,7 +13,7 @@ std::string Command::commandTypeToString() {
     }
 }
 
-std::string Command::getCleanName(){
+std::string Command::getCleanName()const{
     std::string cleanName = args;
     size_t lastSlash = cleanName.find_last_of("/");
     if (lastSlash != std::string::npos) cleanName = cleanName.substr(lastSlash + 1);

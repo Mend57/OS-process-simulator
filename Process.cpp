@@ -1,21 +1,14 @@
 #include "Process.h"
 
-
-Process::Process(const std::string& p_name, size_t p_pcState, int p_accState, int p_pid): name(p_name), pcState(p_pcState), accState(p_accState),
+Process::Process(const std::string& p_name, const size_t p_pcState, const int p_accState, const int p_pid): name(p_name), pcState(p_pcState), accState(p_accState),
                                                                                            pid(p_pid), isBlocked(false), startTick(-1), endTick(-1){};
 
-void Process::printRemainingCommands()const {
-    for (auto p : commands){
-        std::cout << p->commandTypeToString() << std::endl;
-    }
-}
-
-void Process::block(int currentTick, int durationTicks) {
+void Process::block(const int currentTick, const int durationTicks) {
     isBlocked = true;
     blockCompletionTime = currentTick + durationTicks;
 }
 
-bool Process::shouldUnblock(int currentTick) {
+bool Process::shouldUnblock(const int currentTick) {
     if (isBlocked && currentTick >= blockCompletionTime) {
         isBlocked = false;
         blockCompletionTime = -1;

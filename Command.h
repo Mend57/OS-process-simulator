@@ -18,9 +18,11 @@ class Command{
     const std::string args;
 
     public:
-        Command(CommandType p_commandType, const std::string& p_args = "", const int p_value = 0): commandType(p_commandType), args(p_args), value(p_value){};
-        std::pair<std::string, int> getArgs(){return {args, value};};
-        CommandType getCommandType(){return commandType;};
-        std::string commandTypeToString();
-        std::string getCleanName();
+        Command(const CommandType p_commandType, const std::string& p_args = "", const int p_value = 0): commandType(p_commandType), args(p_args), value(p_value){};
+
+        std::pair<std::string, int> getArgs()const{return {args, value};};
+        CommandType getCommandType()const{return commandType;};
+
+        std::string commandTypeToString()const;
+        std::string getCleanName()const;
 };

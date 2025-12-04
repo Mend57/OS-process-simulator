@@ -55,7 +55,7 @@ std::string CPU::getBlockedList()const{
 void CPU::printStatus()const{
     std::string blockedList = getBlockedList();
     if (blockedList.empty()) blockedList = "-";
-    printf("%-7d %-3d %-12s %-7ld %-7d %-12s", currentTick, activeProcess->getPID(), activeProcess->getCleanName().c_str(), activeProcess->getCPUState().first,
+    printf("%-7d %-3d %-12s %-7ld %-7d %-10s", currentTick, activeProcess->getPID(), activeProcess->getCleanName().c_str(), activeProcess->getCPUState().first,
              activeProcess->getCPUState().second, blockedList.c_str());
 
     std::shared_ptr<Command> currentCommand = activeProcess->fetchCommand(pc);
@@ -71,7 +71,7 @@ void CPU::printStatus()const{
 void CPU::printAllBlockedStatus() const{
     std::string blockedList = getBlockedList();
     if (blockedList.empty()) blockedList = "-";
-    printf("%-7d %-3s %-12s %-7ld %-7d %-12s", currentTick, "-", "----", activeProcess->getCPUState().first-1, activeProcess->getCPUState().second,
+    printf("%-7d %-3s %-12s %-7ld %-7d %-10s", currentTick, "-", "----", activeProcess->getCPUState().first-1, activeProcess->getCPUState().second,
              blockedList.c_str());
     printf("%s\n", "----");
 }
@@ -156,17 +156,17 @@ void CPU::unblockFinishedProcesses() {
 
 void CPU::printSummary()const {
     std::cout << "\n\nZusammenfassung der Simulation:\n\n";
-    std::cout << "PID Prozess    Start     Ende     Verweilzeit    Akkumulator" << std::endl;
-    std::cout << "--- -------    -----     ----     -----------    -----------" << std::endl;
+    std::cout << "PID Process    Start     End     Turnaround    Accumulator" << std::endl;
+    std::cout << "--- -------    -----     ---     ----------    -----------" << std::endl;
 
     for (const auto& pair : allProcesses) {
         auto process = pair.second;
         if (process->getEndTick() > 0) {
-            printf("%-3d %-10s %-9d %-8d %-14d %-10d\n", process->getPID(), process->getCleanName().c_str(),process->getStartTick(), process->getEndTick(),
+            printf("%-3d %-10s %-9d %-7d %-13d %-10d\n", process->getPID(), process->getCleanName().c_str(),process->getStartTick(), process->getEndTick(),
                  process->getDuration(), process->getCPUState().second);
         }
     }
-    std::cout << "\nSimulierte Takte: " << currentTick << std::endl;
+    std::cout << "\nnSimulated ticks: " << currentTick << std::endl;
 }
 
 

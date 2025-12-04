@@ -26,8 +26,8 @@ int main(int argc, char* argv[]) {
         cpu.setPreemptive();
     }
 
-    std::cout << "Takt    PID Prozess      PC      AKK     Blockiert   Befehl" << std::endl;
-    std::cout << "----    --- -------      --      ---     ---------   ------" << std::endl;
+    std::cout << "Tick    PID Process      PC      ACC     Blocked   Command" << std::endl;
+    std::cout << "----    --- -------      --      ---     -------   -------" << std::endl;
 
     while(!cpu.processQueueIsEmpty()){
         cpu.incrementTick();

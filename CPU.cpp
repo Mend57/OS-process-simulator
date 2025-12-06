@@ -99,32 +99,27 @@ void CPU::execute(const std::shared_ptr<Process> p_currentProcess){
 
     if(preemptive) preemptiveQueueManagement();
 
+    pc++;
     switch (currentCommand->getCommandType()){
         case LOAD:
             acc = currentCommand->getArgs().second;
-            pc++;
             break;
         case ADD:
             acc += currentCommand->getArgs().second;
-            pc++;
             break;
         case SUB:
             acc -= currentCommand->getArgs().second;
-            pc++;
             break;
         case READ:
             acc = 42;
-            pc++;
             activeProcess->block(currentTick, 4);
             activeProcess->setCPUState(pc, acc);
             return;
         case WRITE:
-            pc++;
             activeProcess->block(currentTick, 4);
             activeProcess->setCPUState(pc, acc);
             return;
         case EXEC:{
-            pc++;
             std::shared_ptr<Process> newProcess = readFile(currentCommand->getArgs().first);
             if (newProcess) {
                 attachProcess(newProcess);
@@ -133,7 +128,6 @@ void CPU::execute(const std::shared_ptr<Process> p_currentProcess){
             return;
         }
         case EXIT:{
-            pc++;
             activeProcess->setCPUState(pc, acc);
             activeProcess->setEndTick(currentTick);
             auto it = std::find(processQueue.begin(), processQueue.end(), p_currentProcess);
@@ -142,7 +136,6 @@ void CPU::execute(const std::shared_ptr<Process> p_currentProcess){
         }
         default:
             std::cout << "Could not read Command " << pc << " from " << p_currentProcess->getName() << std::endl;
-            pc++;
             break;
     }
     activeProcess->setCPUState(pc, acc);
